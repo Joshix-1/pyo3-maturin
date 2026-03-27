@@ -8,6 +8,11 @@ FROM quay.io/pypa/manylinux2014_aarch64 AS base-arm64
 # aarch64 cross compile builder
 FROM --platform=$BUILDPLATFORM ghcr.io/rust-cross/rust-musl-cross:aarch64-musl AS builder-arm64
 
+# riscv64 base
+FROM quay.io/pypa/manylinux_2_39_riscv64 AS base-riscv64
+# aarch64 cross compile builder
+FROM --platform=$BUILDPLATFORM ghcr.io/rust-cross/rust-musl-cross:riscv64-musl AS builder-riscv64
+
 ARG TARGETARCH
 FROM builder-$TARGETARCH AS builder
 
